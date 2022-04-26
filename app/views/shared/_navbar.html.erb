@@ -1,20 +1,42 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
+<!-- this part of the code should change depending on wether the user is a student or tutor-->
+        <% if Current.user %>
+          <% if Current.user.role == "user" %>
+          <li class="nav-item">
+            <a class="nav-link" href="appointments">List classes</a>
+          </li>
+          <% else %>
+          <li class="nav-item">
+            <a class="nav-link" href="appointments">List classes</a>
+          </li>
+          <% end %>
+        <% end %>
+<!-- this part of the code should change depending on wether the user is a student or tutor-->
+        <% if Current.user %>
+          <% if Current.user.role == "user" %>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Register</a>
+          </li>
+          <% elsif Current.user.role == "admin" %>
+          <li class="nav-item">
+            <a class="nav-link" href="users">List Students</a>
+          </li>
+          <% else %>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Create ClassTest</a>
+          </li>
+          <% end %>
+        <% end %>
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li>

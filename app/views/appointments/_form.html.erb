@@ -1,0 +1,39 @@
+<%= form_with(model: appointment) do |form| %>
+  <% if appointment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
+
+      <ul>
+        <% appointment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!--Set some values that should be filled automaticly-->
+
+  <%= form.hidden_field :tutor_id, value:Current.user.userid %>
+
+
+
+  <div>
+    <%= form.label :start_time, style: "display: block" %>
+    <%= form.datetime_field :start_time %>
+  </div>
+
+
+  <div>
+    <%= form.label :faculty, style: "display: block" %>
+    <%= form.text_field :faculty %>
+  </div>
+
+  <div>
+    <%= form.label :professor_id, style: "display: block" %>
+    <%= form.text_field :professor_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

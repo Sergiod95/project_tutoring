@@ -1,4 +1,19 @@
 <div class="d-flex align-items-center justify-content-center">
 	<h1>Welcome to Main Menu</h1>
+
 </div>
 
+<% if Current.user %>
+	<body>
+		<%= month_calendar(events: @appointments) do |date, appointments| %>
+  			<%= date.day %>
+
+  			<% appointments.each do |appointment| %>
+    			<div>
+    	  			<%= appointment.faculty %>
+    	  			<%= appointment.start_time.strftime("%H:%M:%p")%>
+    			</div>
+  			<% end %>
+		<% end %>
+	</body>
+<% end %>

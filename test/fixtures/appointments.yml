@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_time: 2022-04-24 01:29:09
+  tutor_id: MyString
+  student_id: MyString
+  faculty: MyString
+  professor_id: MyString
+  number_students: 1
+
+two:
+  start_time: 2022-04-24 01:29:09
+  tutor_id: MyString
+  student_id: MyString
+  faculty: MyString
+  professor_id: MyString
+  number_students: 1

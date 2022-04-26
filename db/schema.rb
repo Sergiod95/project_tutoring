@@ -10,12 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_14_062550) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_25_024404) do
+  create_table "appointments", force: :cascade do |t|
+    t.datetime "start_time"
+    t.string "tutor_id"
+    t.string "student1"
+    t.string "student2"
+    t.string "student3"
+    t.string "student4"
+    t.string "student5"
+    t.string "faculty"
+    t.string "professor_id"
+    t.integer "number_students", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "userid"
+    t.string "name"
+    t.string "lastname"
+    t.string "role", default: "user"
   end
 
 end

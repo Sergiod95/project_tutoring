@@ -1,0 +1,42 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Users</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>userid</th>
+      <th>email</th>
+      <th>name</th>
+      <th>lastname</th>
+      <th>role</th>
+    </tr>
+  </thead>
+  
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.userid %>
+        </td>
+        <td><%= user.email %>
+        </td>
+        <td><%= user.name %>
+        </td>
+        <td><%= user.lastname %>
+        </td>
+        <td><%= user.role %>
+        </td>
+        <td><%= link_to 'Show', user %>
+        </td>
+        <!-- add editor in future-->
+        <td><%= link_to 'delete', { controller: "users", action: "destroy", id: user.id }, method: :delete, data: { confirm: 'Are you sure?'} %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= button_to "New user", new_user_path, :method => "get" %>
+
+
