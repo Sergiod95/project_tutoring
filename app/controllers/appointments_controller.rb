@@ -3,6 +3,8 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments or /appointments.json
   def index
+    @users = User.all
+
     # for the admin it will show all the appointments
     if Current.user.role == "admin"
       @appointments = Appointment.all
@@ -18,6 +20,11 @@ class AppointmentsController < ApplicationController
   # GET /appointments/1 or /appointments/1.json
   def show
   end
+
+  def list
+    @appointments = Appointment.where(:student1 => Current.user.userid).or(Appointment.where(:student2 => Current.user.userid)).or(Appointment.where(:student3 => Current.user.userid)).or(Appointment.where(:student4 => Current.user.userid)).or(Appointment.where(:student5 => Current.user.userid))
+  end
+
 
   def join
     @appointment = Appointment.find(params[:id])
@@ -38,8 +45,58 @@ class AppointmentsController < ApplicationController
     flash[:alert] = "Successfully joined the appointment"
   end
 
+  def remove
+    @appointment = Appointment.find(params[:id])
+    if Current.user.userid == @appointment.student1
+
+      case @appointment.number_students
+      when 1
+        @appointment.update(student1: nil , number_students: 0)
+      when 2
+        @appointment.update(student1: appointment.student2 , student2: nil , number_students: 1)
+      when 3
+        @appointment.update(student1: appointment.student3 , student3: nil , number_students: 2)
+      when 4
+        @appointment.update(student1: appointment.student4 , student4: nil , number_students: 3)
+      when 5
+        @appointment.update(student1: appointment.student5 , student5: nil , number_students: 4)
+      end
+    elsif Current.user.userid == @appointment.student2
+      case @appointment.number_students
+      when 2
+        @appointment.update(student2: nil , number_students: 1)
+      when 3
+        @appointment.update(student2: appointment.student3 , student3: nil , number_students: 2)
+      when 4
+        @appointment.update(student2: appointment.student4 , student4: nil , number_students: 3)
+      when 5
+        @appointment.update(student2: appointment.student5 , student5: nil , number_students: 4)
+      end
+    elsif Current.user.userid == @appointment.student3
+      case @appointment.number_students
+      when 3
+        @appointment.update(student3: nil , number_students: 2)
+      when 4
+        @appointment.update(student3: appointment.student4 , student4: nil , number_students: 3)
+      when 5
+        @appointment.update(student3: appointment.student5 , student5: nil , number_students: 4)
+      end
+    elsif Current.user.userid == @appointment.student4
+      case @appointment.number_students
+      when 4
+        @appointment.update(student4: nil , number_students: 3)
+      when 5
+        @appointment.update(student4: appointment.student5 , student5: nil , number_students: 4)
+      end
+    else
+      @appointment.update(student5: nil , number_students: 4)
+    end
+    flash[:alert] = "Successfully removed from the appointment"
+  end
+
   # GET /appointments/new
   def new
+    @professors = Professor.all
     @appointment = Appointment.new
   end
 
@@ -50,6 +107,7 @@ class AppointmentsController < ApplicationController
   # POST /appointments or /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
+
 
     respond_to do |format|
       if @appointment.save

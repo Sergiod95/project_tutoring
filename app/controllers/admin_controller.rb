@@ -4,7 +4,7 @@ class AdminController < ApplicationController
   # GET /appointments or /appointments.json
   def index
     @appointments = Appointment.all
-    @user = User.all
+    @user = User.all.select [:userid, :name, :lastname]
   end
 
   # GET /appointments/1 or /appointments/1.json

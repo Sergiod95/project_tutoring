@@ -6,7 +6,8 @@
 
   <p>
     <strong>Tutor:</strong>
-    <%= appointment.tutor_id %>
+    <%@user = User.where(userid: appointment.tutor_id).take%>
+    <%= "#{@user.name} #{@user.lastname}" %>
   </p>
 
 

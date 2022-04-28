@@ -3,8 +3,24 @@
 <%= render @appointment %>
 
 <div>
-  <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %> |
-  <%= link_to "Back to appointments", appointments_path %>
+  <%if Current.user.role != "user" %>
+    <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %> |
+  <%end%>
 
-  <%= button_to "Destroy this appointment", @appointment, method: :delete %>
+  <%if Current.user.role == "user" %>
+    <%if Current.user.userid == @appointment.student1 || Current.user.userid == @appointment.student2 || Current.user.userid == @appointment.student3 || Current.user.userid == @appointment.student4 || Current.user.userid == @appointment.student5 %>
+      <%= link_to "Unregister from this appointment", remove_path(@appointment.id) %> |
+    <%else%>
+      <%= link_to "Join this appointment", join_path(@appointment.id) %> |
+    <%end%>
+
+  <%end%>
+
+  <%= link_to "Back to appointments", appointments_path %>
+  
+  <%if Current.user.role != "user" %>
+    <%= button_to "Destroy this appointment", @appointment, method: :delete %>
+  <%end%>
 </div>
+
+

@@ -1,0 +1,41 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Professors</h1>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Prof_ID</th>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Lastname</th>
+      <th>Faculty</th>
+
+    </tr>
+  </thead>
+  
+
+  <tbody>
+    <% @professors.each do |professor| %>
+      <tr>
+        <td><%= professor.prof_id %>
+        </td>
+        <td><%= professor.email %>
+        </td>
+        <td><%= professor.name %>
+        </td>
+        <td><%= professor.lastname %>
+        </td>
+        <td><%= professor.faculty %>
+        </td>
+        <td><%= link_to 'Show', professor %>
+        </td>
+        <td><%= link_to 'delete', { controller: "professors", action: "destroy", id: professor.id }, method: :delete, data: { confirm: 'Are you sure?'} %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= button_to "New appointment", new_professor_path, :method => "get" %>

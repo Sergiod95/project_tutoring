@@ -13,7 +13,7 @@
         <% if Current.user %>
           <% if Current.user.role == "user" %>
           <li class="nav-item">
-            <a class="nav-link" href="appointments">List classes</a>
+            <a class="nav-link" href="list">List classes</a>
           </li>
           <% else %>
           <li class="nav-item">
@@ -25,21 +25,17 @@
         <% if Current.user %>
           <% if Current.user.role == "user" %>
           <li class="nav-item">
-            <a class="nav-link" href="#">Register</a>
+            <a class="nav-link" href="appointments">Register</a>
           </li>
           <% elsif Current.user.role == "admin" %>
           <li class="nav-item">
             <a class="nav-link" href="users">List Students</a>
           </li>
-          <% else %>
           <li class="nav-item">
-            <a class="nav-link" href="#">Create ClassTest</a>
+            <a class="nav-link" href="professors">List Professors</a>
           </li>
           <% end %>
         <% end %>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
       </ul>
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

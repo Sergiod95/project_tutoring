@@ -13,27 +13,61 @@
 
   <!--Set some values that should be filled automaticly-->
 
-  <%= form.hidden_field :tutor_id, value:Current.user.userid %>
+  <% if Current.user.role != "admin" %>
+    <%= form.hidden_field :tutor_id, value:Current.user.userid %>
+  <% else %>
+    <%= form.collection_select(:tutor_id, User.all, :userid, :name) %>
+  <%end%>
 
-
-
-  <div>
-    <%= form.label :start_time, style: "display: block" %>
+  <label for="basic-url" class="form-label">Start Time</label>
+  <div class="input-group mb-3">
     <%= form.datetime_field :start_time %>
   </div>
 
-
-  <div>
-    <%= form.label :faculty, style: "display: block" %>
-    <%= form.text_field :faculty %>
+  <div class="input-group mb-3">
+    <label for="basic-url" class="form-label">Faculty</label>
+ 
+    <select class="form-select" aria-label="Default select example">
+      <option selected>Open this select menu</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
   </div>
 
-  <div>
-    <%= form.label :professor_id, style: "display: block" %>
-    <%= form.text_field :professor_id %>
-  </div>
+  <%= form.collection_select(:professor_id, Professor.all, :prof_id, :name) %>
 
-  <div>
+
+
+
+  <% if Current.user.role == "REMOVED FOR THE MOMENT" %>
+    <label for="basic-url" class="form-label">Student1</label>
+    <div class="input-group mb-3">
+      <%= form.text_field :student1 %>
+    </div>
+    <label for="basic-url" class="form-label">Student2</label>
+    <div class="input-group mb-3">
+      <%= form.text_field :student2 %>
+    </div>
+    <label for="basic-url" class="form-label">Student3</label>
+    <div class="input-group mb-3">
+      <%= form.text_field :student3 %>
+    </div>
+    <label for="basic-url" class="form-label">Student4</label>
+    <div class="input-group mb-3">
+      <%= form.text_field :student4 %>
+    </div>
+    <label for="basic-url" class="form-label">Student5</label>
+    <div class="input-group mb-3">
+      <%= form.text_field :student5 %>
+    </div>
+    <label for="basic-url" class="form-label">Number Students</label>
+    <div class="input-group mb-3">
+      <%= form.number_field :number_students %>
+    </div>
+  <%end%>
+
+  <div class="input-group mb-3">
     <%= form.submit %>
   </div>
 <% end %>
