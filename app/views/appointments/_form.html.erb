@@ -16,7 +16,9 @@
   <% if Current.user.role != "admin" %>
     <%= form.hidden_field :tutor_id, value:Current.user.userid %>
   <% else %>
-    <%= form.collection_select(:tutor_id, User.all, :userid, :name) %>
+    <div class="input-group mb-3">
+      <%= form.collection_select(:tutor_id, User.where(:role => "tutor"), :userid, :name_with_lastname) %>
+    </div>
   <%end%>
 
   <label for="basic-url" class="form-label">Start Time</label>
@@ -24,23 +26,18 @@
     <%= form.datetime_field :start_time %>
   </div>
 
+
+  <label for="basic-url" class="form-label">faculty</label>
   <div class="input-group mb-3">
-    <label for="basic-url" class="form-label">Faculty</label>
- 
-    <select class="form-select" aria-label="Default select example">
-      <option selected>Open this select menu</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+    <%= form.text_field :faculty %>
+  </div>
+  <div class="input-group mb-3">
+    <%= form.collection_select(:professor_id, Professor.all, :prof_id, :name_with_lastname) %>
   </div>
 
-  <%= form.collection_select(:professor_id, Professor.all, :prof_id, :name) %>
 
 
-
-
-  <% if Current.user.role == "REMOVED FOR THE MOMENT" %>
+  <% if Current.user.role == "admin" %>
     <label for="basic-url" class="form-label">Student1</label>
     <div class="input-group mb-3">
       <%= form.text_field :student1 %>

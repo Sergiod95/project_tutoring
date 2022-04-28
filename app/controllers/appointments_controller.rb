@@ -107,6 +107,21 @@ class AppointmentsController < ApplicationController
   # POST /appointments or /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
+    if @appointment.student1.empty?
+      @appointment.update(student1: nil)
+    end
+    if @appointment.student2.empty?
+      @appointment.update(student2: nil)
+    end
+    if @appointment.student3.empty?
+      @appointment.update(student3: nil)
+    end
+    if @appointment.student4.empty?
+      @appointment.update(student4: nil)
+    end
+    if @appointment.student5.empty?
+      @appointment.update(student5: nil)
+    end
 
 
     respond_to do |format|

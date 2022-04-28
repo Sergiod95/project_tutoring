@@ -7,7 +7,7 @@
   <p>
     <strong>Tutor:</strong>
     <%@user = User.where(userid: appointment.tutor_id).take%>
-    <%= "#{@user.name} #{@user.lastname}" %>
+    <%= @user.name_with_lastname %>
   </p>
 
 
@@ -18,7 +18,8 @@
 
   <p>
     <strong>Professor:</strong>
-    <%= appointment.professor_id %>
+    <%@professor = Professor.where(prof_id: appointment.professor_id).take%>
+    <%= @professor.name_with_lastname %>
   </p>
 
   <p>

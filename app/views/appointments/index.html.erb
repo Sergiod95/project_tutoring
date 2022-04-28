@@ -35,9 +35,10 @@
         <td><%= appointment.start_time %>
         </td>
         <%@user = User.where(userid: appointment.tutor_id).take%>
-        <td><%= "#{@user.name} #{@user.lastname}" %>
+        <td><%= @user.name_with_lastname %> 
         </td>
-        <td><%= appointment.professor_id %>
+        <%@professor = Professor.where(prof_id: appointment.professor_id).take%>
+        <td><%= @professor.name_with_lastname  %>
         </td>
         <td><%= appointment.number_students %>
         </td>
@@ -45,7 +46,7 @@
 
           <% if appointment.student1 != nil%>
             <%@user = User.where(userid: appointment.student1).take%>
-            <td><%= "#{@user.name} #{@user.lastname}" %>
+            <td><%= @user.name_with_lastname %>
             </td>
           <% else %>
             <td><%= appointment.student1 %>
@@ -54,7 +55,7 @@
 
           <% if appointment.student2 != nil%>
             <%@user = User.where(userid: appointment.student2).take%>
-            <td><%= "#{@user.name} #{@user.lastname}" %>
+            <td><%= @user.name_with_lastname %>
             </td>
           <% else %>
             <td><%= appointment.student2 %>
@@ -63,7 +64,7 @@
 
           <% if appointment.student3 != nil%>
             <%@user = User.where(userid: appointment.student3).take%>
-            <td><%= "#{@user.name} #{@user.lastname}" %>
+            <td><%= @user.name_with_lastname %>
             </td>
           <% else %>
             <td><%= appointment.student3 %>
@@ -72,7 +73,7 @@
 
           <% if appointment.student4 != nil%>
             <%@user = User.where(userid: appointment.student4).take%>
-            <td><%= "#{@user.name} #{@user.lastname}" %>
+            <td><%= @user.name_with_lastname %>
             </td>
           <% else %>
             <td><%= appointment.student4 %>
@@ -81,7 +82,7 @@
 
           <% if appointment.student5 != nil%>
             <%@user = User.where(userid: appointment.student5).take%>
-            <td><%= "#{@user.name} #{@user.lastname}" %>
+            <td><%= @user.name_with_lastname %>
             </td>
           <% else %>
             <td><%= appointment.student5 %>
