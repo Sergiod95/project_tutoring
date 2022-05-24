@@ -28,8 +28,8 @@
         <%@user = User.where(userid: appointment.tutor_id).take%>
         <td><%= "#{@user.name} #{@user.lastname}" %>
         </td>
-        <td><%= appointment.professor_id %>
-        </td>
+        <%@professor = Professor.where(prof_id: appointment.professor_id).take%>
+        <td><%= @professor.name_with_lastname  %>
         <td><%= appointment.number_students %>
         </td>
 

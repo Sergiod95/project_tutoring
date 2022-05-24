@@ -8,12 +8,13 @@ class AppointmentsController < ApplicationController
     # for the admin it will show all the appointments
     if Current.user.role == "admin"
       @appointments = Appointment.all
+      @appointments = Appointment.order('start_time DESC')
     #for the tutor only the clases from that tutor will show
     elsif Current.user.role == "tutor"
-      @appointments = Appointment.where(tutor_id: Current.user.userid)
+      @appointments = Appointment.where(tutor_id: Current.user.userid).where("start_time > ?" , DateTime.now).order('start_time DESC')
     #only empty clases or clases where the user is not on them
     else
-      @appointments = Appointment.where(number_students: 0).or(Appointment.where.not(:student1 => Current.user.userid, :student2 => Current.user.userid, :student3 => Current.user.userid, :student4 => Current.user.userid, :student5 => Current.user.userid))
+      @appointments = Appointment.where(number_students: 0).where("start_time > ?" , DateTime.now).or(Appointment.where.not(:student1 => Current.user.userid, :student2 => Current.user.userid, :student3 => Current.user.userid, :student4 => Current.user.userid, :student5 => Current.user.userid)).order('start_time DESC')
     end 
   end
 
@@ -22,7 +23,7 @@ class AppointmentsController < ApplicationController
   end
 
   def list
-    @appointments = Appointment.where(:student1 => Current.user.userid).or(Appointment.where(:student2 => Current.user.userid)).or(Appointment.where(:student3 => Current.user.userid)).or(Appointment.where(:student4 => Current.user.userid)).or(Appointment.where(:student5 => Current.user.userid))
+    @appointments = Appointment.where("student1 = ? AND start_time > ?", Current.user.userid , DateTime.now).or(Appointment.where("student2 = ? AND start_time > ?", Current.user.userid , DateTime.now)).or(Appointment.where("student3 = ? AND start_time > ?", Current.user.userid , DateTime.now)).or(Appointment.where("student4 = ? AND start_time > ?", Current.user.userid , DateTime.now)).or(Appointment.where("student5 = ? AND start_time > ?", Current.user.userid , DateTime.now)).order('start_time ASC')
   end
 
 
@@ -107,21 +108,21 @@ class AppointmentsController < ApplicationController
   # POST /appointments or /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
-    if @appointment.student1.empty?
-      @appointment.update(student1: nil)
-    end
-    if @appointment.student2.empty?
-      @appointment.update(student2: nil)
-    end
-    if @appointment.student3.empty?
-      @appointment.update(student3: nil)
-    end
-    if @appointment.student4.empty?
-      @appointment.update(student4: nil)
-    end
-    if @appointment.student5.empty?
-      @appointment.update(student5: nil)
-    end
+    #if @appointment.student1.empty?
+    #  @appointment.update(student1: nil)
+    #end
+    #if @appointment.student2.empty?
+    #  @appointment.update(student2: nil)
+    #end
+    #if @appointment.student3.empty?
+    #  @appointment.update(student3: nil)
+    #end
+    #if @appointment.student4.empty?
+    #  @appointment.update(student4: nil)
+    #end
+    #if @appointment.student5.empty?
+    #  @appointment.update(student5: nil)
+    #end
 
 
     respond_to do |format|
