@@ -36,7 +36,7 @@ class AppointmentsController < ApplicationController
   end
 
   def calendarlist
-    @appointments = Appointment.where("DATE(start_time) == ? ", params[:date])
+    @appointments = Appointment.where("start_time.to_date == ? ", params[:date])
   end
 
 
