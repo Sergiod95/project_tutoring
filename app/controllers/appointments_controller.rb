@@ -36,8 +36,8 @@ class AppointmentsController < ApplicationController
   end
 
   def calendarlist
-    @begining = DateTime(:date.year, :date.month, :date.day, 0, 0, 0)
-    @ending = DateTime(:date.year, :date.month, :date.day, 23, 59, 59)
+    @begining = DateTime.new(:date.year, :date.month, :date.day, 0, 0, 0)
+    @ending = DateTime.new(:date.year, :date.month, :date.day, 23, 59, 59)
     @appointments = Appointment.where('start_time BETWEEN ? AND ? ', @begining, @ending)
   end
 
