@@ -21,7 +21,7 @@
 	    	  				<%= appointment.start_time.strftime("%H:%M:%p")%>
 	    	  				<%= link_to 'Show', appointment %>
 	    	  			<% elsif event == 0 %>
-	    	  				<p><%= link_to "event", calendarlist_path(appointment.start_time.to_date) %></p>
+	    	  				<p><%= link_to "event", calendarlist_path(appointment.start_time) %></p>
 	    	  				<% event = 1 %>
 	    	  			<% end %>
     				</div>
