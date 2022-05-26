@@ -14,16 +14,29 @@
   			<% event = 0 %>
 
   			<% appointments.each do |appointment| %>
-    			<div>
-    				<% if Current.user.role != "admin" %>
-    	  				<%= appointment.faculty %>
-    	  				<%= appointment.start_time.strftime("%H:%M:%p")%>
-    	  				<%= link_to 'Show', appointment %>
-    	  			<% elsif event == 0 %>
-    	  				<p><%= link_to "event", calendarlist_path(appointment.start_time.to_date) %></p>
-    	  				<% event = 1 %>
-    	  			<% end %>
-    			</div>
+    			<% if appointment.start_time.to_date == DateTime.now.to_date %>
+    				<div class="p-3 mb-2 bg-warning text-dark">
+	    				<% if Current.user.role != "admin" %>
+	    	  				<%= appointment.faculty %>
+	    	  				<%= appointment.start_time.strftime("%H:%M:%p")%>
+	    	  				<%= link_to 'Show', appointment %>
+	    	  			<% elsif event == 0 %>
+	    	  				<p><%= link_to "event", calendarlist_path(appointment.start_time.to_date) %></p>
+	    	  				<% event = 1 %>
+	    	  			<% end %>
+    				</div>
+    			<% else %>
+	    			<div>
+	    				<% if Current.user.role != "admin" %>
+	    	  				<%= appointment.faculty %>
+	    	  				<%= appointment.start_time.strftime("%H:%M:%p")%>
+	    	  				<%= link_to 'Show', appointment %>
+	    	  			<% elsif event == 0 %>
+	    	  				<p><%= link_to "event", calendarlist_path(appointment.start_time.to_date) %></p>
+	    	  				<% event = 1 %>
+	    	  			<% end %>
+	    			</div>
+    			<% end %>
   			<% end %>
 		<% end %>
 	</body>

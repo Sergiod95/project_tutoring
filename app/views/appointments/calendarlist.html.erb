@@ -40,6 +40,8 @@
           <td><%= link_to 'join', join_path(appointment.id) %>
           </td>
         <% end %>
+         <td><%= link_to "Forum", classforum_path(appointment.id) %>
+        </td>
 
 
         <% if Current.user.role != "user" %>
