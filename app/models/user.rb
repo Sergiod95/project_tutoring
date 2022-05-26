@@ -7,5 +7,13 @@ class User < ApplicationRecord
 		"#{name} #{lastname}"
 	end
 
+	def name_list
+		"#{name} #{lastname}, #{email}, #{userid}"
+	end
+
+	def name_email
+		"#{name} #{lastname}, #{email}"
+	end
+
 end
 

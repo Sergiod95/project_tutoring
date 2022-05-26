@@ -8,9 +8,19 @@
   <p>
     <strong>Tutor:</strong>
     <%@user = User.where(userid: appointment.tutor_id).take%>
-    <%= @user.name_with_lastname %>
+    <%= @user.name_email %>
   </p>
 
+  <p>
+    <strong>Topic:</strong>
+     <%= @appointment.topic %>
+  </p>
+
+
+  <p>
+    <strong>Comments:</strong>
+    <%= @appointment.comments  %>
+  </p>
 
   <p>
     <strong>Faculty:</strong>
@@ -20,12 +30,66 @@
   <p>
     <strong>Professor:</strong>
     <%@professor = Professor.where(prof_id: appointment.professor_id).take%>
-    <%= @professor.name_with_lastname %>
+    <%= @professor.name_email %>
   </p>
 
   <p>
     <strong>Number students:</strong>
     <%= appointment.number_students %>
   </p>
+
+  <p>
+    
+    <%if Current.user.role != "user" %>
+    <strong>List Students:</strong>
+    <% if appointment.student1 != nil%>
+      <%@user = User.where(userid: appointment.student1).take%>
+      <div><%= @user.name_list %>
+      </div>
+    <% else %>
+      <td><%= appointment.student1 %>
+      </td>
+    <%end%>
+
+    <% if appointment.student2 != nil%>
+      <%@user = User.where(userid: appointment.student2).take%>
+      <td><%= @user.name_list %>
+      </td>
+    <% else %>
+      <td><%= appointment.student2 %>
+      </td>
+    <%end%>
+
+    <% if appointment.student3 != nil%>
+      <%@user = User.where(userid: appointment.student3).take%>
+      <td><%= @user.name_list %>
+      </td>
+    <% else %>
+      <td><%= appointment.student3 %>
+      </td>
+    <%end%>
+
+    <% if appointment.student4 != nil%>
+      <%@user = User.where(userid: appointment.student4).take%>
+      <td><%= @user.name_list %>
+      </td>
+    <% else %>
+      <td><%= appointment.student4 %>
+      </td>
+    <%end%>
+
+    <% if appointment.student5 != nil%>
+      <%@user = User.where(userid: appointment.student5).take%>
+      <td><%= @user.name_list %>
+      </td>
+    <% else %>
+      <td><%= appointment.student5 %>
+      </td>
+    <%end%>
+  <%end%>
+
+  </p>
+
+
 
 </div>

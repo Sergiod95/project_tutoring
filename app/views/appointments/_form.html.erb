@@ -27,14 +27,24 @@
     <%= form.datetime_field :start_time %>
   </div>
 
+  <label for="basic-url" class="form-label">Topic</label>
+  <div class="input-group mb-3">
+    <%= form.text_field :topic %>
+  </div>
 
-  <label for="basic-url" class="form-label">faculty</label>
+  <label for="basic-url" class="form-label">Course</label>
   <div class="input-group mb-3">
     <%= form.text_field :faculty %>
   </div>
   <label for="basic-url" class="form-label">Professor</label>
   <div class="input-group mb-3">
     <%= form.collection_select(:professor_id, Professor.all, :prof_id, :name_with_lastname) %>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Comments</label>
+    <div><%= form.text_area :comments, :cols => 30, :rows => 10 %></div>
+    <!--<textarea class="form-control" id="comments" rows="3"></textarea>-->
   </div>
 
 

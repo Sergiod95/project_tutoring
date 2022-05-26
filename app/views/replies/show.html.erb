@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @reply %>
+
+<div>
+  <%= link_to "Edit this reply", edit_reply_path(@reply) %> |
+  <%@post = Post.where(id: @reply.postid).take%>
+  <%@appointment = Appointment.where(id: @post.classid).take%>
+  <%= link_to "Back to Class", classforum_path(@appointment.id) %>
+
+  <%= button_to "Destroy this reply", @reply, method: :delete %>
+</div>

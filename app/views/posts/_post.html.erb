@@ -1,0 +1,21 @@
+
+<div class="card">
+  <h5 class="card-header">
+    <p>
+    <strong>Title:</strong>
+    <%= post.title %> |
+    <%@user = User.where(userid: post.authorid).take%>
+    <strong>Author:</strong>
+    <%= @user.name_with_lastname  %> |
+    <strong>Replies:</strong>
+    <%= post.replies %>
+    </p>
+  </h5>
+
+  <div class="card-body">
+    <p>
+    <strong>Content:</strong>
+    <div><%= post.content %></div>
+    </p>
+  </div>
+</div>

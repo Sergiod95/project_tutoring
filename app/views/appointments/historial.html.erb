@@ -1,0 +1,54 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Appointments</h1>
+
+<a href="list" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">List of Appointments</a>
+<a href="appointments" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Register</a>
+<a href="historial" class="btn btn-success btn-lg " role="button" aria-pressed="true">Historial of Class</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Date</th>
+      <th>Topics</th>
+      <th>Tutor</th>
+      <th>Professor</th>
+      <th>Students</th>
+
+    </tr>
+  </thead>
+  
+
+  <tbody>
+    <% @appointments.each do |appointment| %>
+      <tr>
+        <td><%= appointment.faculty %>
+        </td>
+        <td><%= appointment.start_time %>
+        </td>
+        <td><%= appointment.topic %>
+        </td>
+        <%@user = User.where(userid: appointment.tutor_id).take%>
+        <td><%= "#{@user.name} #{@user.lastname}" %>
+        </td>
+        <%@professor = Professor.where(prof_id: appointment.professor_id).take%>
+        <td><%= @professor.name_with_lastname  %>
+        <td><%= appointment.number_students %> /5
+        </td>
+
+
+        <td><%= link_to 'Show', appointment %>
+        </td>
+        <td><%= link_to 'Remove', remove_path(appointment.id) %>
+        </td>
+        <!-- add editor in future-->
+        <% if Current.user.role != "user" %>
+          <td><%= link_to 'Delete', { controller: "appointments", action: "destroy", id: appointment.id }, method: :delete, data: { confirm: 'Are you sure?'} %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

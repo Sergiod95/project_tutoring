@@ -4,24 +4,19 @@
 
 <% if Current.user.role == "user" %>
   <a href="list" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">List of Appointments</a>
-  <a href="appointments" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Register</a>
+  <a href="appointments" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">Register</a>
+  <a href="historial" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Historial of Class</a>
 <%end%>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Faculty</th>
+      <th>Course</th>
       <th>Date</th>
+      <th>Topics</th>
       <th>Tutor</th>
       <th>Professor</th>
       <th>Students</th>
-      <%if Current.user.role != "user" %>
-      <th>Students1</th>
-      <th>Students2</th>
-      <th>Students3</th>
-      <th>Students4</th>
-      <th>Students5</th>
-      <%end%>
 
     </tr>
   </thead>
@@ -34,61 +29,17 @@
         </td>
         <td><%= appointment.start_time %>
         </td>
+        <td><%= appointment.topic %>
+        </td>
         <%@user = User.where(userid: appointment.tutor_id).take%>
         <td><%= @user.name_with_lastname %> 
         </td>
         <%@professor = Professor.where(prof_id: appointment.professor_id).take%>
         <td><%= @professor.name_with_lastname  %>
         </td>
-        <td><%= appointment.number_students %>
+        <td><%= appointment.number_students %> /5
         </td>
-        <%if Current.user.role != "user" %>
 
-          <% if appointment.student1 != nil%>
-            <%@user = User.where(userid: appointment.student1).take%>
-            <td><%= @user.name_with_lastname %>
-            </td>
-          <% else %>
-            <td><%= appointment.student1 %>
-            </td>
-          <%end%>
-
-          <% if appointment.student2 != nil%>
-            <%@user = User.where(userid: appointment.student2).take%>
-            <td><%= @user.name_with_lastname %>
-            </td>
-          <% else %>
-            <td><%= appointment.student2 %>
-            </td>
-          <%end%>
-
-          <% if appointment.student3 != nil%>
-            <%@user = User.where(userid: appointment.student3).take%>
-            <td><%= @user.name_with_lastname %>
-            </td>
-          <% else %>
-            <td><%= appointment.student3 %>
-            </td>
-          <%end%>
-
-          <% if appointment.student4 != nil%>
-            <%@user = User.where(userid: appointment.student4).take%>
-            <td><%= @user.name_with_lastname %>
-            </td>
-          <% else %>
-            <td><%= appointment.student4 %>
-            </td>
-          <%end%>
-
-          <% if appointment.student5 != nil%>
-            <%@user = User.where(userid: appointment.student5).take%>
-            <td><%= @user.name_with_lastname %>
-            </td>
-          <% else %>
-            <td><%= appointment.student5 %>
-            </td>
-          <%end%>
-        <%end%>
 
 
         <td><%= link_to 'Show', appointment %>

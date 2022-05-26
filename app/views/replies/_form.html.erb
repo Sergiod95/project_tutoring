@@ -1,0 +1,23 @@
+
+<%= simple_form_for(@reply) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <label for="basic-url" class="form-label">Comment</label>
+    <div class="input-group mb-3">
+      <%= f.text_area :content %>
+    </div>
+
+
+    <%= f.hidden_field :postid, value:@postid%>
+    <%= f.hidden_field :authorid, value:Current.user.userid%>
+    <%= f.hidden_field :creation_date, value:DateTime.now%>
+  </div>
+
+  <div class="input-group mb-3">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+

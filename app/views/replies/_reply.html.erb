@@ -1,0 +1,23 @@
+
+<div class="card m-5">
+  <h5 class="card-header">
+  <p>
+    <%@user = User.where(userid: reply.authorid).take%>
+    <strong>Author:</strong>
+    <%= @user.name_with_lastname %> |
+    <%= reply.creation_date %> |
+    <% if Current.user.userid == @post.authorid %>
+      <%= link_to "Edit", edit_reply_path(@reply) %> |
+    <% end %>
+
+  </p>
+  </h5>
+
+  <div class="card-body">
+  <p>
+    <strong>Content:</strong>
+    <div><%= reply.content %></div>
+  </p>
+  </div>
+</div>
+

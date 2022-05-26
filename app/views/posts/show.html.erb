@@ -1,0 +1,31 @@
+<p style="color: green"><%= notice %></p>
+
+<%@reply = Reply.where(postid: @post.id)%>
+<%@r = 0%>
+<% @reply.each do |reply| %>
+  <% @r = @r + 1 %>
+<% end %>
+
+<%@post.update(replies: @r)%>
+
+<div class="card">
+  <div class="card-body">
+
+    <% if Current.user.userid == @post.authorid %>
+      <%= link_to "Edit post", edit_post_path(@post) %> |
+    <% end %>
+
+    <%= link_to "Reply", newreplay_path(@post.id) %> |
+    <%= link_to "Back to class Forum", classforum_path(@post.classid) %>
+    <!--| <%= link_to "Delete", @post, method: :delete  %> -->
+
+
+  </div>
+</div>
+
+
+<%= render @post %>
+<%= render @reply %>
+
+
+

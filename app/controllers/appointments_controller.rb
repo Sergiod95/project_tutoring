@@ -23,7 +23,15 @@ class AppointmentsController < ApplicationController
   end
 
   def list
-    @appointments = Appointment.where("student1 = ? AND start_time > ?", Current.user.userid , DateTime.now).or(Appointment.where("student2 = ? AND start_time > ?", Current.user.userid , DateTime.now)).or(Appointment.where("student3 = ? AND start_time > ?", Current.user.userid , DateTime.now)).or(Appointment.where("student4 = ? AND start_time > ?", Current.user.userid , DateTime.now)).or(Appointment.where("student5 = ? AND start_time > ?", Current.user.userid , DateTime.now)).order('start_time ASC')
+    @appointments = Appointment.where("student1 = ? AND start_time > ?", Current.user.userid , DateTime.now).or(Appointment.where("student2 = ? AND start_time > ?", Current.user.userid , DateTime.now)).or(Appointment.where("student3 = ? AND start_time > ?", Current.user.userid , DateTime.now)).or(Appointment.where("student4 = ? AND start_time > ?", Current.user.userid , DateTime.now)).or(Appointment.where("student5 = ? AND start_time > ?", Current.user.userid , DateTime.now))
+  end
+
+  def historial
+    @appointments = Appointment.where(:student1 => Current.user.userid).or(Appointment.where(:student2 => Current.user.userid)).or(Appointment.where(:student3 => Current.user.userid)).or(Appointment.where(:student4 => Current.user.userid)).or(Appointment.where(:student5 => Current.user.userid)).order('start_time DESC')
+  end
+
+  def calendarlist
+    @appointments = Appointment.where("DATE(start_time) == ? ", params[:date])
   end
 
 
@@ -167,6 +175,6 @@ class AppointmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def appointment_params
-      params.require(:appointment).permit(:start_time, :tutor_id, :student1, :student2, :student3, :student4, :student5, :faculty, :professor_id, :number_students)
+      params.require(:appointment).permit(:start_time, :tutor_id, :student1, :student2, :student3, :student4, :student5, :faculty, :professor_id, :number_students, :topic, :comments)
     end
 end
