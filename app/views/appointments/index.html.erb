@@ -8,6 +8,11 @@
   <a href="historial" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Historial of Class</a>
 <%end%>
 
+<% if Current.user.role == "tutor" %>
+  <a href="appointments" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">List of Appointments</a>
+  <a href="historial" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Historial of Class</a>
+<%end%>
+
 <table class="table">
   <thead>
     <tr>

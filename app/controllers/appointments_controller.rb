@@ -27,7 +27,12 @@ class AppointmentsController < ApplicationController
   end
 
   def historial
-    @appointments = Appointment.where(:student1 => Current.user.userid).or(Appointment.where(:student2 => Current.user.userid)).or(Appointment.where(:student3 => Current.user.userid)).or(Appointment.where(:student4 => Current.user.userid)).or(Appointment.where(:student5 => Current.user.userid)).order('start_time DESC')
+    if Current.user.role == "user"
+      @appointments = Appointment.where(:student1 => Current.user.userid).or(Appointment.where(:student2 => Current.user.userid)).or(Appointment.where(:student3 => Current.user.userid)).or(Appointment.where(:student4 => Current.user.userid)).or(Appointment.where(:student5 => Current.user.userid)).order('start_time DESC')
+    elsif Current.user.role == "tutor"
+      @appointments = Appointment.where(tutor_id: Current.user.userid).order('start_time DESC')
+    end
+
   end
 
   def calendarlist
