@@ -13,8 +13,8 @@
  *= require_tree .
  *= require_self
  */
-    import "trix"
-    import "@rails/actiontext"
+import "trix"
+import "@rails/actiontext"
 
-    *= require simple_calendar
+*= require simple_calendar
 
