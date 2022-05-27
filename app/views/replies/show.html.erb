@@ -8,5 +8,5 @@
   <%@appointment = Appointment.where(id: @post.classid).take%>
   <%= link_to "Back to Class", classforum_path(@appointment.id) %>
 
-  <%= button_to "Destroy this reply", @reply, method: :delete %>
+  <%= button_to "Remove this reply", @reply, method: :delete %>
 </div>
