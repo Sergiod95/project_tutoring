@@ -6,7 +6,7 @@
   <%= link_to "Edit this reply", edit_reply_path(@reply) %> |
   <%@post = Post.where(id: @reply.postid).take%>
   <%@appointment = Appointment.where(id: @post.classid).take%>
-  <%= link_to "Back to Class", classforum_path(@appointment.id) %>
+  <%= link_to "Back to Class", post %>
 
   <%= button_to "Destroy this reply", @reply, method: :delete %>
 </div>
