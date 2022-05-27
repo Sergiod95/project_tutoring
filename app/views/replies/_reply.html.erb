@@ -6,7 +6,6 @@
     <strong>Author:</strong>
     <%= @user.name_with_lastname %> |
     <%= reply.creation_date %> |
-    <%@post = Post.where(userid: reply.authorid).take%>
     <% if Current.user.userid == @post.authorid %>
       <%= link_to "Edit", edit_reply_path(@reply) %> |
     <% end %>
