@@ -36,7 +36,7 @@ class AppointmentsController < ApplicationController
   end
 
   def calendarlist
-    @appointments = Appointment.where("start_time LIKE ? ", params[:date] + "%")
+    @appointments = Appointment.where("start_time::string LIKE ? ", params[:date]::string + "%")
   end
 
 
